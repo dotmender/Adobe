@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--****************************************************************************
+  * ADOBE CONFIDENTIAL
+  * ___________________
+  *
+  * Copyright 2022 Adobe
+  * All Rights Reserved.
+  *
+  * NOTICE: All information contained herein is, and remains
+  * the property of Adobe and its suppliers, if any. The intellectual
+  * and technical concepts contained herein are proprietary to Adobe
+  * and its suppliers and are protected by all applicable intellectual
+  * property laws, including trade secret and copyright laws.
+  * Adobe permits you to use and modify this file
+  * in accordance with the terms of the Adobe license agreement
+  * accompanying it (see LICENSE_ADOBE_PS.txt).
+  * If you have received this file from a source other than Adobe,
+  * then your use, modification, or distribution of it
+  * requires the prior written permission from Adobe.
+  ***************************************************************************-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Core_OtpLogin::otp_module" title="OTP Login" module="Core_OtpLogin" sortOrder="51" resource="Core_OtpLogin::otp" parent="Magento_Customer::customer"/>
+        <add id="Core_OtpLogin::otp" title="OTP Logs" module="Core_OtpLogin" sortOrder="10" action="core_otplogin/otp" resource="Core_OtpLogin::otp" parent="Core_OtpLogin::otp_module"/>
+        <add id="Core_OtpLogin::otp_configuration" title="OTP Module Configuration" module="Core_OtpLogin" sortOrder="99" parent="Core_OtpLogin::otp" action="adminhtml/system_config/edit/section/otp_login" resource="Core_OtpLogin::otp_configuration"/>
+    </menu>
+</config>

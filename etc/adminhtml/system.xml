@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--****************************************************************************
+  * ADOBE CONFIDENTIAL
+  * ___________________
+  *
+  * Copyright 2022 Adobe
+  * All Rights Reserved.
+  *
+  * NOTICE: All information contained herein is, and remains
+  * the property of Adobe and its suppliers, if any. The intellectual
+  * and technical concepts contained herein are proprietary to Adobe
+  * and its suppliers and are protected by all applicable intellectual
+  * property laws, including trade secret and copyright laws.
+  * Adobe permits you to use and modify this file
+  * in accordance with the terms of the Adobe license agreement
+  * accompanying it (see LICENSE_ADOBE_PS.txt).
+  * If you have received this file from a source other than Adobe,
+  * then your use, modification, or distribution of it
+  * requires the prior written permission from Adobe.
+  ***************************************************************************-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="otp_login" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <label>OTP Login</label>
+            <tab>core</tab>
+            <resource>Core_OtpLogin::configuration</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable</label>
+                    <comment><![CDATA[Change it to No to disable OTP Login.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="api" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>API Settings</label>
+                <field id="env_mode" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Environment</label>
+                    <source_model>Core\OtpLogin\Model\Config\Source\Environment</source_model>
+                </field>
+                <field id="gateway_sandbox" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Sandbox Endpoint</label>
+                </field>
+                <field id="gateway_production" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Production Endpoint</label>
+                </field>
+                <field id="client_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Client ID</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="secret_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>AWS Secret Access Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="app_token" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="0"
+                       showInStore="0">
+                    <label>App Token</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+            <group id="otp_config" translate="label" sortOrder="50" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>OTP Configurations</label>
+                <field id="max_try" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="1">
+                    <label>Maximum Retry Attempts</label>
+                </field>
+                <field id="otp_expired_time" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>OTP Expiration Time</label>
+                    <comment><![CDATA[Kindly mention the number in minutes]]></comment>
+                </field>
+                <field id="otp_validation_time" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>OTP Validation Time</label>
+                    <comment><![CDATA[Kindly mention the number in minutes]]></comment>
+                </field>
+                <field id="otp_locking_period" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>OTP Locking Period For Failed Attempts</label>
+                    <comment><![CDATA[Kindly mention the number in minutes]]></comment>
+                </field>
+                <field id="generate_otp_interval" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Time Interval to calculate generated OTP</label>
+                    <comment><![CDATA[Time interval calculate how many OTPs are generated]]></comment>
+                </field>
+                <field id="interval_reminder" translate="label" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Time interval To Send the Remainder for customer</label>
+                    <comment><![CDATA[Kindly mention the number in minutes]]></comment>
+                </field>
+                <field id="resend_otp" translate="label" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Time interval To Resend The OTP</label>
+                    <comment><![CDATA[Kindly mention the number in minutes]]></comment>
+                </field>
+                <field id="otp_format" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>OTP Format</label>
+                    <source_model>Core\OtpLogin\Model\Config\Source\OtpFormat</source_model>
+                </field>
+                <field id="otp_length" translate="label" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Length of OTP to send to customer</label>
+                    <comment><![CDATA[Kindly mention the length in numbers between 6 - 12]]></comment>
+                </field>
+                <field id="otp_log" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Debug Log</label>
+                    <comment><![CDATA[Change it to No to disable OTP Log.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="test_otp" translate="label" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Test OTP</label>
+                    <comment><![CDATA[For testing use static OTP]]></comment>
+                </field>
+                <field id="test_reference_code" translate="label" type="text" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Test Reference Code</label>
+                    <comment><![CDATA[For Testing use static reference code]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

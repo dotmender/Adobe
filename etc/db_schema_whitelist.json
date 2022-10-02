@@ -1,0 +1,51 @@
+{
+    "otp_login": {
+        "column": {
+            "otp_id": true,
+            "otp": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true,
+            "mobile_number": true,
+            "is_blocked": true,
+            "verify_otp_data": true,
+            "api_logs": true,
+            "otp_event": true,
+            "is_registered": true,
+            "status": true
+        },
+        "index": {
+            "OTP_LOGIN_OTP": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "OTP_LOGIN_OTP_ID": true
+        }
+    },
+    "otp_reference_code": {
+        "column": {
+            "entity_id": true,
+            "reference_code": true,
+            "otp_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "OTP_REFERENCE_CODE_OTP_ID_OTP_LOGIN_OTP_ID": true,
+            "OTP_REFERENCE_CODE_REFERENCE_CODE": true
+        }
+    },
+    "user_login_agent": {
+        "column": {
+            "entity_id": true,
+            "token": true,
+            "customer_id": true,
+            "login_agent_data": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "USER_LOGIN_AGENT_ENTITY_ID": true
+        }
+    }
+}

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--****************************************************************************
+  * ADOBE CONFIDENTIAL
+  * ___________________
+  *
+  * Copyright 2022 Adobe
+  * All Rights Reserved.
+  *
+  * NOTICE: All information contained herein is, and remains
+  * the property of Adobe and its suppliers, if any. The intellectual
+  * and technical concepts contained herein are proprietary to Adobe
+  * and its suppliers and are protected by all applicable intellectual
+  * property laws, including trade secret and copyright laws.
+  * Adobe permits you to use and modify this file
+  * in accordance with the terms of the Adobe license agreement
+  * accompanying it (see LICENSE_ADOBE_PS.txt).
+  * If you have received this file from a source other than Adobe,
+  * then your use, modification, or distribution of it
+  * requires the prior written permission from Adobe.
+  ***************************************************************************-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">core_otplogin_otp_listing.core_otplogin_otp_listing_data_source</item>
+            <item name="deps" xsi:type="string">core_otplogin_otp_listing.core_otplogin_otp_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">spinner_columns</item>
+    </argument>
+    <dataSource name="nameOfDataSource">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">core_otplogin_otp_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">otp_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">otp_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+
+    <container name="listing_top">
+    <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="template" xsi:type="string">ui/grid/toolbar</item>
+        </item>
+    </argument>
+    <bookmark name="bookmarks">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/bookmarks/bookmarks</item>
+                <item name="displayArea" xsi:type="string">dataGridActions</item>
+                <item name="storageConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="mui/bookmark/save"/>
+                    <item name="deleteUrl" xsi:type="url" path="mui/bookmark/delete"/>
+                    <item name="namespace" xsi:type="string">core_otplogin_data</item>
+                </item>
+            </item>
+        </argument>
+    </bookmark>
+    <container name="columns_controls">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="columnsData" xsi:type="array">
+                    <item name="provider" xsi:type="string">core_otplogin_data.core_otplogin_data.core_otplogin_data_columns</item>
+                </item>
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                <item name="displayArea" xsi:type="string">dataGridActions</item>
+            </item>
+        </argument>
+    </container>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="displayArea" xsi:type="string">dataGridFilters</item>
+                    <item name="dataScope" xsi:type="string">filters</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">core_otplogin_data.core_otplogin_data.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">core_otplogin_data.core_otplogin_data.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">core_otplogin_data.core_otplogin_data.listing_top.bookmarks:current.columns.${ $.index }.visible</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <filterInput name="mobile_number">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataScope" xsi:type="string">mobile_number</item>
+                        <item name="label" xsi:type="string" translate="true">Mobile Number</item>
+                    </item>
+                </argument>
+            </filterInput>
+        </filters>
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">core_otplogin_data.core_otplogin_data.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                    <item name="selectProvider" xsi:type="string">core_otplogin_data.core_otplogin_data.wk_emp_data_columns.ids</item>
+                    <item name="displayArea" xsi:type="string">bottom</item>
+                </item>
+            </argument>
+        </paging>
+    </container>
+
+    <columns name="spinner_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="indexField" xsi:type="string">otp_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="otp_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="label" xsi:type="string" translate="true">OTP Id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="mobile_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Mobile Number</item>
+                </item>
+            </argument>
+        </column>
+        <column name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Core\OtpLogin\Model\Config\Source\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="editor" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Is Active</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </column>
+        <column name="otp_event">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">OTP Event</item>
+                </item>
+            </argument>
+        </column>
+        <column name="verify_otp_data">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">OTP Verification Logs</item>
+                </item>
+            </argument>
+        </column>
+        <column name="api_logs">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">SMS Gateway Logs</item>
+                </item>
+            </argument>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Created</item>
+                </item>
+            </argument>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Modified</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

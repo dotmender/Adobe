@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--****************************************************************************
+  * ADOBE CONFIDENTIAL
+  * ___________________
+  *
+  * Copyright 2022 Adobe
+  * All Rights Reserved.
+  *
+  * NOTICE: All information contained herein is, and remains
+  * the property of Adobe and its suppliers, if any. The intellectual
+  * and technical concepts contained herein are proprietary to Adobe
+  * and its suppliers and are protected by all applicable intellectual
+  * property laws, including trade secret and copyright laws.
+  * Adobe permits you to use and modify this file
+  * in accordance with the terms of the Adobe license agreement
+  * accompanying it (see LICENSE_ADOBE_PS.txt).
+  * If you have received this file from a source other than Adobe,
+  * then your use, modification, or distribution of it
+  * requires the prior written permission from Adobe.
+  ***************************************************************************-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <otp_login>
+            <otp_config>
+                <max_try>5</max_try>
+                <otp_expired_time>5</otp_expired_time>
+                <otp_validation_time>5</otp_validation_time>
+                <otp_locking_period>15</otp_locking_period>
+                <interval_reminder>60</interval_reminder>
+                <resend_otp>5</resend_otp>
+                <otp_format>alphabetic</otp_format>
+                <otp_length>6</otp_length>
+                <generate_otp_interval>2</generate_otp_interval>
+                <test_otp>123456</test_otp>
+                <test_reference_code>77</test_reference_code>
+            </otp_config>
+        </otp_login>
+    </default>
+</config>

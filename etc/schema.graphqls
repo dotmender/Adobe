@@ -1,0 +1,108 @@
+# Copyright 2022 Adobe
+# All Rights Reserved.
+#
+# NOTICE: All information contained herein is, and remains
+# the property of Adobe and its suppliers, if any. The intellectual
+# and technical concepts contained herein are proprietary to Adobe
+# and its suppliers and are protected by all applicable intellectual
+# property laws, including trade secret and copyright laws.
+# Adobe permits you to use and modify this file
+# in accordance with the terms of the Adobe license agreement
+# accompanying it (see LICENSE_ADOBE_PS.txt).
+# If you have received this file from a source other than Adobe,
+# then your use, modification, or distribution of it
+# requires the prior written permission from Adobe.
+type Mutation
+{
+    SendMobileOtp (
+        input: SendOtpInput!
+    ):
+    SendOtpOutPut @resolver(class: "\\Core\\OtpLogin\\Model\\Resolver\\SendOtp") @doc(description:"Seng Login or Registration OTP")
+
+    ValidateMobileOtp (
+        input: OtpValidationInput!
+    ):
+    ValidationOutPut @resolver(class: "\\Core\\OtpLogin\\Model\\Resolver\\ValidateOtp") @doc(description:"Validate OTP and Create Customer Token")
+
+    createCustomerAccount (
+        input: createCustomerInput!
+    ):
+    CustomerOutPut @resolver(class: "\\Core\\OtpLogin\\Model\\Resolver\\CreateCustomerAccount") @doc(description:"Create customer account by OTP")
+}
+
+input SendOtpInput {
+    mobile_number: String @doc(description: "The customer's Mobile Number")
+    event: String @doc(description: "Send OTP Event Login Update Mobile")
+}
+
+type SendOtpOutPut @doc(description: "contains logic to send otp to mobile number") {
+    message_code: String @doc(description: "Message Code for Success Failed")
+    message: String @doc(description: "Success or Error Message")
+    otp_reference_code: String @doc(description: "OTP Reference Code")
+}
+
+input OtpValidationInput {
+    mobile_number: String! @doc(description: "Customer Mobile Number")
+    mobile_otp: String! @doc(description: "The customer's Mobile Number OTP")
+    otp_reference_code: String! @doc(description: "OTP Reference Code")
+    browser_data: [BrowserDataInput!]! @doc(description: "Login Device Data to store in database.")
+}
+
+input BrowserDataInput {
+    ip: String @doc(description: "Customer Ip")
+    region: String @doc(description: "Customer Region")
+    bu_name: String @doc(description: "Customer BU Name")
+    browser: String @doc(description: "Customer browser details")
+    agent: String @doc(description: "Customer browser agent details")
+    timezone: String @doc(description: "Customer current timezone")
+    datetime: String @doc(description: "Customer current time")
+    latitude: String @doc(description: "Latitude")
+    longitude: String @doc(description: "Longitude")
+}
+
+type ValidationOutPut @doc(description: "contains logic to validate the mobile number OTP") {
+    token: String @doc(description: "Customer Login Token")
+    message_code: String @doc(description: "Message Code for Success Failed")
+    message: String @doc(description: "Success or Error Message")
+    cookies_data: CookiesData @doc(description: "Customer Cookies")
+}
+
+type CookiesData {
+    store_id: Int @doc(description: "Store Id")
+    customer_id: String @doc(description: "Customer Entity Id")
+    customer_group: String @doc(description: "Custoemr Grpup Id")
+    customer_token: String @doc(description: "Customer Login Token")
+    firstname: String @doc(description: "Customer Firstname")
+    lastname: String @doc(description: "Customer Lastname")
+}
+
+input createCustomerInput {
+    fullname: String @doc(description: "Customer Firstname")
+    mobile_number: String @doc(description: "Customer Mobile Number")
+    is_subscribed: Int @doc(description: "Customer Registration Consent")
+    consent_privacy_version: String @doc(descritpion: "1.1")
+    consent_marketing_status: Boolean @doc(description: "true or false")
+    consent_privacy_status: Boolean @doc(description: "true or false")
+    browser_data: [BrowserDataInput!]! @doc(description: "Login Device Data to store in database.")
+}
+
+type CustomerOutPut @doc(description: "contains logic to validate the mobile number OTP") {
+    token: String @doc(description: "Customer Login Token")
+    message_code: String @doc(description: "Message Code for Success Failed")
+    message: String @doc(description: "Success or Error Message")
+    cookies_data: CookiesData @doc(description: "Customer Cookies")
+}
+
+type StoreConfig {
+    max_try: Int  @doc(description: "Maximum Retry Attempts") ,
+    otp_expired_time: Int @doc(description: "OTP Expiration Time")
+    otp_validation_time: Int @doc(description: "Otp Validation Time")
+    otp_locking_period: Int @doc(description: "Otp Locking Period For Failed Attempts")
+    interval_reminder: Int @doc(description: "Interval Remainder To Send The Registration Process")
+    resend_otp: Int @doc(description: "Time Interval To Resend the Otp")
+    otp_format: String @doc(description: "Otp Format to Send The Customer")
+    otp_length: Int @doc(description: "Otp Length to Send To The Customer")
+    client_id: String @doc(description: "Aws Client ID")
+    secret_key: String @doc(description: "Aws Client Secret Key")
+    app_token: String @doc(description: "App Token")
+}
